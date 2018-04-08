@@ -7,14 +7,41 @@
         <title>title</title>
     </head>
     <body>
-        <form>
-            Username: <input type="text" placeholder="John" /> <br>
+        <form action="index.html" method="get" id="form">
+            Username: <input type="text" placeholder="John" id="username" /> <br>
             Email: <input type="email" placeholder="John@xyz.com" /> <br>
             Password: <input type="password" /> <br>
             Repeat Password: <input type="password" /> <br>
             Telephone: <input type="number" placeholder="035791234" /> <br>
             Country: <input type="text" placeholder="Israel" /> <br>
-            <button type="button">sign up</button>
+            <button type="button" id="submit-button">sign up</button>
         </form>
+        <script>
+            var validateUser = function(){
+                if(document.getElementById("username").value.length < 5){
+                    if(!document.getElementById("error")){
+                        var error = document.createElement("div");
+                        error.setAttribute("id", "error");
+                        error.appendChild(document.createTextNode("error - name shorter than 5"));
+                        document.getElementById("form").appendChild(error);
+                    }
+                    return false;
+                }
+                else {
+                    if(document.getElementById("error")){
+                        var error = document.getElementById("error");
+                        error.removeChild(error.firstChild);
+                        error.parentNode.removeChild(error);
+                    }
+                    alert("thank you for registering");
+                    return true;
+                }
+            };
+            var submitForm = function(){
+                validateUser();
+                // if(validate()){this.parentElement.submit()};
+            };
+            document.getElementById("submit-button").addEventListener("click",submitForm)
+        </script>
     </body>
 </html>
